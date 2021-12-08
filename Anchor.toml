@@ -1,16 +1,13 @@
-[programs.devnet]
-doorman = "BEkHbtz2BY143de8jNGJ8DEUJqYrAQe7mYQ7qB8yCafS"
-
 [programs.localnet]
-doorman = "BEkHbtz2BY143de8jNGJ8DEUJqYrAQe7mYQ7qB8yCafS"
+doorman = "D8bTW1sgKaSki1TBUwxarPySLp3TNVgB2bwRVbbTLYeV"
 
 [registry]
 url = "https://anchor.projectserum.com"
 
 [provider]
-cluster = "devnet"
-#cluster = "localnet"
-wallet = "/Users/solanadev/Desktop/doorman/wallet/wallet.json"
+#cluster = "devnet"
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
 #wallet = "~/.config/solana/id2.json"
 
 [scripts]
@@ -22,6 +19,7 @@ show-config = "node -r dotenv/config scripts/show_config.js dotenv_config_path=.
 update-config = "node -r dotenv/config scripts/update_config.js dotenv_config_path=./app/.env"          # update doorman config
 test-purchase = "node -r dotenv/config scripts/test_purchase.js dotenv_config_path=./app/.env"          # test a mint token purchase
 add-addresses = "node -r dotenv/config scripts/add_addresses.js dotenv_config_path=./app/.env"              # add an address
+reload = "node -r dotenv/config scripts/reload_vault.js dotenv_config_path=./app/.env"
 
 ### for candymachine interactions
 cm-update-config = "node -r dotenv/config scripts/cm_update_config.js dotenv_config_path=./app/.env"            # update candymachine config
