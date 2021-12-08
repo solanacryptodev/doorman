@@ -20,6 +20,13 @@ import {Alert, Button, Snackbar} from "@mui/material";
 import CandyMachineConfigInfo from "./CandyMachineConfigInfo";
 import {getCandyMachineState, mintOneToken} from "../utils/candyutils";
 import {awaitTransactionSignatureConfirmation, sendTransactionWithRetry} from "../utils/connection";
+import { Account, programs } from '@metaplex/js';
+const {
+   metaplex: { Store, AuctionManager },
+   metadata: { Metadata },
+   auction: { Auction },
+   vault: { Vault }
+} = programs;
 
 const spl = require("@solana/spl-token");
 const {
@@ -89,6 +96,8 @@ export default function Main({ network }) {
    useEffect(() => {
       (async () => {
          if (wallet) {
+            //const metadata = await Metadata.load(connection, '35Nd2hisoAy77PfLbRdnbysWH9rPhiCDjKvgZxADdCdR');
+            //console.log( metadata.data );
             const balance = await connection.getBalance(wallet.publicKey);
             setSolBalance(balance / anchor.web3.LAMPORTS_PER_SOL);
             const provider = new Provider(connection, wallet, preflightCommitment);

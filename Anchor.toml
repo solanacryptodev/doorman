@@ -1,8 +1,8 @@
 [programs.devnet]
-doorman = "D8bTW1sgKaSki1TBUwxarPySLp3TNVgB2bwRVbbTLYeV"
+doorman = "BEkHbtz2BY143de8jNGJ8DEUJqYrAQe7mYQ7qB8yCafS"
 
 [programs.localnet]
-doorman = "D8bTW1sgKaSki1TBUwxarPySLp3TNVgB2bwRVbbTLYeV"
+doorman = "BEkHbtz2BY143de8jNGJ8DEUJqYrAQe7mYQ7qB8yCafS"
 
 [registry]
 url = "https://anchor.projectserum.com"
@@ -10,7 +10,7 @@ url = "https://anchor.projectserum.com"
 [provider]
 cluster = "devnet"
 #cluster = "localnet"
-wallet = "~/.config/solana/id.json"
+wallet = "/Users/solanadev/Desktop/doorman/wallet/wallet.json"
 #wallet = "~/.config/solana/id2.json"
 
 [scripts]

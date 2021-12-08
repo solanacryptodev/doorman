@@ -3,7 +3,7 @@ use anchor_spl::token::{self, Mint, TokenAccount, Transfer, SetAuthority};
 use spl_token::instruction::AuthorityType;
 use std::ops::DerefMut;
 
-declare_id!("D8bTW1sgKaSki1TBUwxarPySLp3TNVgB2bwRVbbTLYeV");
+declare_id!("BEkHbtz2BY143de8jNGJ8DEUJqYrAQe7mYQ7qB8yCafS");
 
 use {
     anchor_lang::{
@@ -79,7 +79,7 @@ pub mod doorman {
             ctx.accounts.into_transfer_to_pda_context(),
             num_tokens
         )?;
-
+            ctx.accounts.
         Ok(())
     }
 

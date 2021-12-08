@@ -3,15 +3,17 @@ import { TOKEN_PROGRAM_ID,   ASSOCIATED_TOKEN_PROGRAM_ID } from '@solana/spl-tok
 import {
    WalletNotConnectedError,
 } from '@solana/wallet-adapter-base';
+import {Connection} from "@solana/web3.js";
 
 const anchor = require("@project-serum/anchor");
 const spl = require("@solana/spl-token");
+let setConnection = new anchor.web3.Connection("https://api.devnet.solana.com");
 
 const DEFAULT_TIMEOUT = 15000;
 
 export async function sendSignedTransaction({
                                                signedTransaction,
-                                               connection,
+                                               connection = setConnection,
                                                timeout = DEFAULT_TIMEOUT,
                                             }) {                           // : Promise<{ txid: string; slot: number }> {
    const rawTransaction = signedTransaction.serialize();
@@ -27,9 +29,9 @@ export async function sendSignedTransaction({
    console.log('Started awaiting confirmation for', txid);
 
    let done = false;
-   (async () => {
+   await (async () => {
       while (!done && getUnixTs() - startTime < timeout) {
-         connection.sendRawTransaction(rawTransaction, {
+         await connection.sendRawTransaction(rawTransaction, {
             skipPreflight: true,
          });
          await sleep(500);
@@ -87,7 +89,7 @@ export async function sendSignedTransaction({
 }
 
 export async function simulateTransaction(
-   connection,
+   connection = setConnection,
    transaction,
    commitment,
 ) {                                                //Promise<RpcResponseAndContext<SimulatedTransactionResponse>> {
@@ -113,7 +115,7 @@ export async function simulateTransaction(
 }
 
 export const sendTransactionWithRetry = async (
-   connection,
+   connection = setConnection,
    wallet,
    instructions,                                      // TransactionInstruction[],
    signers,                                           // Keypair[],
@@ -162,7 +164,7 @@ export const sendTransactionWithRetry = async (
 export async function awaitTransactionSignatureConfirmation(
    txid,
    timeout,
-   connection,
+   connection = setConnection,
    commitment,                                             // Commitment = 'recent',
    queryStatus,                                          // = false,
 ) {                                                      //: Promise<SignatureStatus | null | void> {
@@ -208,7 +210,7 @@ export async function awaitTransactionSignatureConfirmation(
       }
       while (!done && queryStatus) {
          // eslint-disable-next-line no-loop-func
-         (async () => {
+         await (async () => {
             try {
                const signatureStatuses = await connection.getSignatureStatuses([
                   txid,
@@ -241,7 +243,7 @@ export async function awaitTransactionSignatureConfirmation(
 
    //@ts-ignore
    if (connection._signatureSubscriptions[subId])
-      connection.removeSignatureListener(subId);
+      await connection.removeSignatureListener(subId);
    done = true;
    console.log('Returning status', status);
    return status;

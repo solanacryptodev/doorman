@@ -1,4 +1,4 @@
-import { CANDYMACHINE_ID, CANDYMACHINE_PROGRAM, TOKEN_METADATA_PROGRAM, connection } from "./config";
+import { CANDYMACHINE_ID, MINT, CANDYMACHINE_PROGRAM, TOKEN_METADATA_PROGRAM, connection } from "./config";
 import { createAssociatedTokenAccountInstruction } from "./chainutils";
 import { sendTransactionWithRetry } from "./connection";
 
